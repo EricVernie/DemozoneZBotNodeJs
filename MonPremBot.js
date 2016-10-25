@@ -1,36 +1,32 @@
-var builder = require("botbuilder");
-
-//Step 1
-// var connector = new builder.ConsoleConnector().listen();
-// var bot = new builder.UniversalBot(connector);
-
-// bot.dialog('/',function(session) {    
-//     session.send("Vous avez dit : " + session.message.text);
-// });
-
 var restify = require('restify');
-//Step 2
+var builder = require('botbuilder');
+
+// Get secrets from server environment
+var botConnectorOptions = { 
+    appId: process.env.MICROSOFT_APP_ID, 
+    appSecret: process.env.MICROSOFT_APP_PASSWORD 
+};
+
+// Create bot
+var bot = new builder.BotConnectorBot(botConnectorOptions);
+bot.add('/', function (session) {
+    
+    //respond with user's message
+    session.send("You said " + session.message.text);
+});
+
 // Setup Restify Server
 var server = restify.createServer();
-server.listen(process.env.port || process.env.PORT || 3978, function () {
-   console.log('%s écoute sur le port %s', server.name, server.url); 
+
+// Handle Bot Framework messages
+server.post('/api/messages', bot.verifyBotFramework(), bot.listen());
+
+// Serve a static web page
+server.get(/.*/, restify.serveStatic({
+	'directory': '.',
+	'default': 'index.html'
+}));
+
+server.listen(process.env.port || 3978, function () {
+    console.log('%s listening to %s', server.name, server.url); 
 });
-  
-// // Create chat bot
-var connector = new builder.ChatConnector({
-    appId: process.env.MICROSOFT_APP_ID,
-    appPassword: process.env.MICROSOFT_APP_PASSWORD
-});
-var connector = new builder.ChatConnector();
-var bot = new builder.UniversalBot(connector);
-server.post('/api/messages', connector.listen());
-
-// //=========================================================
-// // Bots Dialogs
-// //=========================================================
-
-bot.dialog('/',function (session) {
-    session.send("vous avez dit : " + session.message.text);    
-});
-
-
