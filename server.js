@@ -12,10 +12,7 @@ var restify = require('restify');
 //Step 2
 // Setup Restify Server
 var server = restify.createServer();
-server.listen(process.env.port || process.env.PORT || 3978, function () {
-   console.log('%s listening to %s', server.name, server.url); 
-});
-  
+
 // // Create chat bot
 var connector = new builder.ChatConnector({
     appId: process.env.MICROSOFT_APP_ID,
@@ -32,10 +29,13 @@ server.post('/api/messages', connector.listen());
 bot.dialog('/',function (session) {
     session.send("Bienvenue dans cette démonstration NodeJs Bot");    
 });
-
+  
 // Serve a static web page
 server.get(/.*/, restify.serveStatic({
 	'directory': '.',
 	'default': 'index.html'
 }));
 
+server.listen(process.env.port || process.env.PORT || 3978, function () {
+   console.log('%s listening to %s', server.name, server.url); 
+});
