@@ -1,0 +1,15 @@
+{
+  "name": "MonPremBot",
+  "version": "1.0.0",
+  "description": "MonPremBot",
+  "main": "MonPremBot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Eric Vernié",
+  "license": "ISC",
+  "dependencies": {
+    "botbuilder": "^3.3.0",
+    "restify": "^4.1.1"
+  }
+}
