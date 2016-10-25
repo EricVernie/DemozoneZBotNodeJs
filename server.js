@@ -33,4 +33,9 @@ bot.dialog('/',function (session) {
     session.send("Bienvenue dans cette démonstration NodeJs Bot");    
 });
 
+// Serve a static web page
+server.get(/.*/, restify.serveStatic({
+	'directory': '.',
+	'default': 'index.html'
+}));
 
