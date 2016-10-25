@@ -1,11 +1,18 @@
 {
   "name": "MonPremBot",
   "version": "1.0.0",
-  "description": "MonPremBot",
-  "main": "MonPremBot.js",
+  "description": "Ceci est mon 1er bot",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": ""
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EricVernie/DemozoneZbotNodeJs.git"
+  },
+  "keywords": [
+    "botframework"
+  ],
   "author": "Eric Vernié",
   "license": "ISC",
   "dependencies": {
