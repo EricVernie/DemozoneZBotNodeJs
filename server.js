@@ -37,5 +37,5 @@ server.get(/.*/, restify.serveStatic({
 }));
 
 server.listen(process.env.port || process.env.PORT || 3978, function () {
-   console.log('%s listening to %s', server.name, server.url); 
+   console.log('%s ecoute sur to %s', server.name, server.url); 
 });
